@@ -1,0 +1,32 @@
+In [2]: models.Company.objects.create(name_company='Android')
+Out[2]: <Company: Android>
+
+In [7]: models.Phone.objects.count()
+Out[7]: 2
+
+In [13]: phone.shop
+Out[13]: <django.db.models.fields.related_descriptors.create_forward_many_to_many_manager.<locals>.ManyRelatedManager at 0x2bebaacdd90>
+
+In [14]: phone.shop.all()
+Out[14]: <QuerySet [<Shop: MTC>]>
+
+In [17]: phone.shop.all()
+Out[17]: <QuerySet [<Shop: MTC>, <Shop: DNS>]>
+
+In [21]: models.Phone.objects.count()
+Out[21]: 4
+
+In [20]: models.Phone.objects.filter(date_of_issue__range=['2015-01-01', '2023-01-01'])
+Out[20]: <QuerySet [<Phone: Iphone13>, <Phone: Samsung50>]>
+
+In [23]: models.Phone.objects.create(phone_name='Samsung60', name_oc='Android', company_id=company.id)
+Out[23]: <Phone: Samsung60>
+
+In [29]: models.Phone.objects.annotate(Avg('volume_memory'))
+Out[29]: <QuerySet [<Phone: Samsung30>, <Phone: Iphone13>, <Phone: Samsung50>, <Phone: Samsung3>, <Phone: Samsung60>, <Phone: Samsung70>, <Phone: Samsung70>, <Phone: Samsung70>]>
+
+In [30]: models.Phone.objects.values('phone_name')
+Out[30]: <QuerySet [{'phone_name': 'Samsung30'}, {'phone_name': 'Iphone13'}, {'phone_name': 'Samsung50'}, {'phone_name': 'Samsung3'}, {'phone_name': 'Samsung60'}, {'phone_name': 'Samsung70'}, {'phone_name': 'Samsung70'}, {'phone_name': 'Samsung70'}]>
+
+In [31]: models.Phone.objects.aggregate(Avg('volume_memory'))
+Out[31]: {'volume_memory__avg': 597.3333333333334}
