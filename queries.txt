@@ -10,6 +10,9 @@ Out[13]: <django.db.models.fields.related_descriptors.create_forward_many_to_man
 In [14]: phone.shop.all()
 Out[14]: <QuerySet [<Shop: MTC>]>
 
+In [15]: b = [models.Shop.objects.last(), models.Shop.objects.first()]
+In [16]: phone.shop.set(b)
+
 In [17]: phone.shop.all()
 Out[17]: <QuerySet [<Shop: MTC>, <Shop: DNS>]>
 
