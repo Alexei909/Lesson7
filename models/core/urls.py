@@ -8,3 +8,5 @@ urlpatterns = [
     path('phone_list/',  views.PhoneList.as_view(), name='phone_list'),
     path('phone/<int:pk>', views.phone_detail, name='phone_detail')
 ]
+
+
