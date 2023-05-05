@@ -1,0 +1,24 @@
+{% extends 'core/base.html' %}
+{% block content %}
+    <h1>{{title}}: {{count}}</h1>
+    <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Название телефона</th>
+            <th scope="col">Операционная система</th>
+            <th scope="col">Объём памяти</th>
+            <th scope="col">Дата выпуска</th>
+          </tr>
+        </thead>
+        <tbody>
+        {% for phone in phones %}
+          <tr>
+            <td>{{phone.phone_name}}</td>
+            <td>{{phone.name_oc}}</td>
+            <td>{{phone.volume_memory}}Гб</td>
+            <td>{{phone.date_of_issue}}</td>
+          </tr>
+        {% endfor %}
+        </tbody>
+      </table>
+  {% endblock %}
