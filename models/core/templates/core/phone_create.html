@@ -1,0 +1,9 @@
+{% extends 'core/base.html' %}
+{% block content %}
+<form action='{% url "core:phone_create" %}' method='POST'>
+    {% csrf_token %}
+    {{ form.as_p }}
+    {{ from.error }}
+    <button type='submit'>Добавить</button>
+</form>
+{% endblock %}
