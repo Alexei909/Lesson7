@@ -15,18 +15,12 @@ class PhoneSearch(forms.Form):
     
 
 class PhoneForm(forms.ModelForm):
-    phone_name = forms.CharField(label='Модель телефона', required=False)
-    name_oc = forms.CharField(label='Название ОС', required=False)
-    volume_memory = forms.IntegerField(label='Объём памяти', min_value=0, required=False)
-
-
-    def clean_phone_name(self):
-        phone_name = self.cleaned_data.get('phone_name')
-        if  phone_name.isdigit():
-            raise forms.ValidationError('Имя должно быть строкой!')
-        return phone_name
-    
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['company'].empty_label = 'Категория не выбрана'
 
     class Meta:
         model = models.Phone
-        fields = '__all__'
+        fields = ('phone_name', 'name_oc', 'volume_memory', 'on_sale', 'date_of_issue', 'company', 'shop')
+
+        

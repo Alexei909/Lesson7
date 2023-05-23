@@ -1,10 +1,11 @@
 {% extends 'core/base.html' %}
 {% block content %}
-    <form action="{% url 'core:phone_del' pk=phone.pk %}" method="POST">
+<div class="form_body">
+    <form action="{% url 'core:phone_del' pk=phone.pk %}" method="POST" class="form">
         {{ form.as_p }}
         {% csrf_token %}
-        <p>Удалить запись {{ phone.phone_name }}?</p>
-        <button type="submit">Удалить</button>
-        <button type="reset">Отмена</button>
+        <h1 class="ab">Удалить запись {{ phone.phone_name }}?</h1>
+        <button type="submit" class="form_button">Удалить</button>
     </form>
+</div>
 {% endblock %}

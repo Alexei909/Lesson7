@@ -1,6 +1,6 @@
 from typing import Any
 from django.db.models.query import QuerySet
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404, redirect
 from core import models, forms, filters
 from django.views.generic import DetailView, ListView, CreateView, UpdateView, DeleteView
 from django.http import HttpResponse
@@ -28,9 +28,10 @@ def index(request):
     return render(request=request, template_name='core/index.html', context=context)
 
 def phone_detail(request, pk):
-    phone = models.Phone.objects.get(id=pk)
+    phone = get_object_or_404(models.Phone, pk=pk)
+    
     context = {'phone': phone,
-               'title': 'Телефон'
+               'title': f'Модель {phone.phone_name}'
 }
     return render(request=request, template_name='core/phone.html', context=context)
 
@@ -53,21 +54,24 @@ class PhoneList(TitleMixin, ListView):
     def get_filter(self):
         return filters.PhoneFilter(self.request.GET)
 
+
 class PhoneCreate(TitleMixin, CreateView):
     model = models.Phone
     template_name = 'core/phone_create.html'
     form_class = forms.PhoneForm
     success_url = reverse_lazy('core:phone_list')
-
+    title = 'Создание'
 
 class PhoneUpdate(TitleMixin, UpdateView):
     model = models.Phone
     template_name = 'core/phone_create.html'
     form_class = forms.PhoneForm
     success_url = reverse_lazy('core:phone_list')
+    title = 'Обновление'
 
 
 class PhoneDelete(TitleMixin, DeleteView):
     model = models.Phone
     template_name = 'core/phone_delete.html'
     success_url = reverse_lazy('core:phone_list')
+    title = 'Удаление'

@@ -1,14 +1,13 @@
 {% extends 'core/base.html' %}
 {% block content %}
-    <form metgod='GET'>
+    <form metgod='GET' class="form_table">
         {{ filter.form.name.label }}<br>{{ filter.form.name }}
-        <button type="submit">Поиск</button>
+        <button type="submit" class="form_botton">Поиск</button>
     </form>
-    <h1>{{title}}: {{count}}</h1>
+    <h1 class="ab">{{title}}: {{count}}</h1>
     <table class="table">
         <thead>
           <tr>
-            <th scope="col">Обновление</th>
             <th scope="col">Модель телефона</th>
             <th scope="col">Операционная система</th>
             <th scope="col">Объём памяти</th>
@@ -16,20 +15,21 @@
               <th scope="col">В продаже</th>
             {% endif %}
             <th scope="col">Дата выпуска</th>
+            <th scope="col">Обновление</th>
             <th scope="col">Удалить</th>
           </tr>
         </thead>
         <tbody>
         {% for phone in phones %}
           <tr>
-            <td><a href='{% url "core:phone_update" pk=phone.pk %}'>Обновить</a></td>
-            <td>{{ phone.phone_name }}</td>
+            <td><a href='{% url "core:phone" pk=phone.pk %}'>{{ phone.phone_name }}</a></td>
             <td>{{ phone.name_oc }}</td>
             <td>{{ phone.volume_memory }}Гб</td>
             {% if request.user.is_superuser %}
-              <td>{{ phone.on_sale|yesno:'да нет' }}Гб</td>
+              <td>{{ phone.on_sale | yesno:'да, нет' }}</td>
             {% endif %}
             <td>{{ phone.date_of_issue }}</td>
+            <td><a href='{% url "core:phone_update" pk=phone.pk %}'>Обновить</a></td>
             <td><a href='{% url "core:phone_del" pk=phone.pk %}'>Удалить</a></td>
           </tr>
         {% empty %} 
