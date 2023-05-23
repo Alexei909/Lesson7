@@ -11,3 +11,5 @@ class PhoneFactory(factory.django.DjangoModelFactory):
 
     class Meta:
         model = models.Phone
+
+        
