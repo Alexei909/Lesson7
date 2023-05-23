@@ -39,3 +39,4 @@ class PhoneTest(TestCase):
         self.assertEqual(resp.status_code, 200)
         phone_db = models.Phone.objects.first()
         self.assertEqual(phone_db, None)
+
