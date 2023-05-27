@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'core',
+    'models',
     'core.apps.CoreConfig',
     'django_filters'
 ]
